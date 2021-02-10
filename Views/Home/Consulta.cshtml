@@ -1,0 +1,455 @@
+﻿@{
+    ViewBag.Title = "Consulta de Actas";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="apple-touch-icon" sizes="76x76" href=@Url.Content("~/Content/Imagenes/apple-icon.png") />
+    <link rel="icon" type="image/png" href=@Url.Content("~/Content/Imagenes/favicon.png") />
+    <title>Material Bootstrap Wizard by Creative Tim | Free Boostrap Wizard</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://www.creative-tim.com/product/paper-bootstrap-wizard" />
+
+    <meta name="keywords" content="wizard, bootstrap wizard, creative tim, long forms, 3 step wizard, sign up wizard, beautiful wizard, long forms wizard, wizard with validation, paper design, paper wizard bootstrap, bootstrap paper wizard">
+    <meta name="description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors.">
+
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Paper Bootstrap Wizard by Creative Tim">
+    <meta name="twitter:description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors.">
+
+    <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/49/opt_pbw_thumbnail.jpg">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Paper Bootstrap Wizard by Creative Tim | Free Boostrap Wizard" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://demos.creative-tim.com/paper-bootstrap-wizard/wizard-list-place.html" />
+    <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/49/opt_pbw_thumbnail.jpg" />
+    <meta property="og:description" content="Paper Bootstrap Wizard is a fully responsive wizard that is inspired by our famous Paper Kit  and comes with 3 useful examples and 5 colors." />
+    <meta property="og:site_name" content="Creative Tim" />
+
+    <!-- CSS Files -->
+    <link href=@Url.Content("~/Content/Estilos/bootstrap.min.css") rel="stylesheet" />
+    <link href=@Url.Content("~/Content/Estilos/paper-bootstrap-wizard.css") rel="stylesheet" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href=@Url.Content("~/Content/Estilos/demo.css") rel="stylesheet" />
+
+    <!-- Fonts and Icons -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href=@Url.Content("~/Content/Estilos/themify-icons.css") rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="image-container set-full-height" style="background-image: url(https://wallpaperaccess.com/full/666312.jpg)">
+
+
+        <!--   Big container   -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+
+                    <!--      Wizard container        -->
+                    <div class="wizard-container">
+
+                        <div class="card wizard-card" data-color="blue" wizardProfile">
+                            <form action="" method=" ">
+                                <!--        You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure"          -->
+
+                                <div class="wizard-header text-center">
+                                    <h3 class="wizard-title">Registro del Acta</h3>
+                                    <p class="category">Complete todos los datos solicitados.</p>
+                                </div>
+                                <!--Barra de arriba de navegación. Falta agregar imagenes de cada cosito-->
+                                <div class="wizard-navigation">
+                                    <div class="progress-with-circle">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3" style="width: 21%;"></div>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="#localizacion" data-toggle="tab">
+                                                <div class="icon-circle">
+                                                    <i class="ti-user"></i>
+                                                </div>
+                                                Localización
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#vehiculo" data-toggle="tab">
+                                                <div class="icon-circle">
+                                                    <i class="ti-settings"></i>
+                                                </div>
+                                                Vehículo
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#persona" data-toggle="tab">
+                                                <div class="icon-circle">
+                                                    <i class="ti-map"></i>
+                                                </div>
+                                                Persona
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#infraccion" data-toggle="tab">
+                                                <div class="icon-circle">
+                                                    <i class="ti-map"></i>
+                                                </div>
+                                                Infracción
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content">
+                                    <!--Los tab pane dividen secciones. Inicio localizacion-->
+                                    <div class="tab-pane" id="localizacion">
+                                        <div class="row">
+                                            <h5 class="info-text"> Indique el número de acta y la localización de la Infracción</h5>
+
+                                            <div class="col-sm-12">
+
+
+                                                <div class="input-group">
+
+                                                    <div class="form-inline">
+                                                        <input class="form-control mr-sm-2" type="search" placeholder="Número de Acta" aria-label="acta">
+                                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Verificar</button>
+                                                    </div>
+
+
+                                                </div>
+                                                <!--acá tiene que empezar el mapa-->
+
+
+                                                <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+                                                <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+                                                <div id='map' style='width: 300px; height: 250px;'></div>
+                                                <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+                                                <link rel="stylesheet"
+                                                      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+                                                      type="text/css" />
+                                                <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+                                                <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+                                                <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+                                                <div id="map"></div>
+
+                                                <script>
+                                                    mapboxgl.accessToken = 'pk.eyJ1Ijoic2Flbm5hIiwiYSI6ImNramtjbWZxcTRldmIyeHA5bm5zYmttbzMifQ.n813MfpZt7yhyRZpJLDcFg';
+                                                    var map = new mapboxgl.Map({
+                                                        container: 'map',
+                                                        style: 'mapbox://styles/mapbox/streets-v11',
+                                                        center: [-64.1810500, -31.4135000],
+                                                        zoom: 13
+                                                    });
+
+                                                    /* given a query in the form "lng, lat" or "lat, lng" returns the matching
+                                                    * geographic coordinate(s) as search results in carmen geojson format,
+                                                    * https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+                                                    */
+                                                    var coordinatesGeocoder = function (query) {
+                                                        // match anything which looks like a decimal degrees coordinate pair
+                                                        var matches = query.match(
+                                                            /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
+                                                        );
+                                                        if (!matches) {
+                                                            return null;
+                                                        }
+
+                                                        function coordinateFeature(lng, lat) {
+                                                            return {
+                                                                center: [lng, lat],
+                                                                geometry: {
+                                                                    type: 'Point',
+                                                                    coordinates: [lng, lat]
+                                                                },
+                                                                place_name: 'Lat: ' + lat + ' Lng: ' + lng,
+                                                                place_type: ['coordinate'],
+                                                                properties: {},
+                                                                type: 'Feature'
+                                                            };
+                                                        }
+
+                                                        var coord1 = Number(matches[1]);
+                                                        var coord2 = Number(matches[2]);
+                                                        var geocodes = [];
+
+                                                        if (coord1 < -90 || coord1 > 90) {
+                                                            // must be lng, lat
+                                                            geocodes.push(coordinateFeature(coord1, coord2));
+                                                        }
+
+                                                        if (coord2 < -90 || coord2 > 90) {
+                                                            // must be lat, lng
+                                                            geocodes.push(coordinateFeature(coord2, coord1));
+                                                        }
+
+                                                        if (geocodes.length === 0) {
+                                                            // else could be either lng, lat or lat, lng
+                                                            geocodes.push(coordinateFeature(coord1, coord2));
+                                                            geocodes.push(coordinateFeature(coord2, coord1));
+                                                        }
+
+                                                        return geocodes;
+                                                    };
+
+                                                    map.addControl(
+                                                        new MapboxGeocoder({
+                                                            accessToken: mapboxgl.accessToken,
+                                                            localGeocoder: coordinatesGeocoder,
+                                                            zoom: 4,
+                                                            placeholder: 'indique coordenadas',
+                                                            mapboxgl: mapboxgl
+                                                        })
+                                                    );
+                                                </script>
+
+
+
+                                                <!--acá termina mapa-->
+
+
+                                                <div class="input-group">
+                                                    <label>Calle de la infracción <small>(required)</small></label>
+                                                    <input name="Calle" type="text" class="form-control">
+                                                </div>
+                                                <div class="input-group">
+                                                    <label>Numeración <small>(required)</small></label>
+                                                    <input name="NumeroCalle" type="text" class="form-control">
+                                                </div>
+                                                <div class="input-group">
+                                                    <label for="fecha" class="form-label">Fecha en que ocurrió la infracción</label>
+                                                    <input type="date" id="fecha" /> <!--tener en cuenta que no puede ser posterior a la hora actual-->
+                                                </div>
+
+
+                                                <div class="input-group">
+                                                    <label for="hora" class="form-label">Horario en que ocurrió la infracción</label>
+                                                    <input type="datetime" id="hora" /> <!--tener en cuenta que no puede ser posterior a la hora actual-->
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <label for="observaciones" class="form-label">Observaciones</label>
+                                                    <input type="text" maxlength="100" name="observaciones" id="observaciones" placeholder="Hasta 100 caracteres" /> <!--hacer con un máximo de 50 caracteres-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Los tab pane dividen secciones. fin localizacion inicio vehiculo-->
+                                    <div class="tab-pane" id="vehiculo">
+                                        <h5 class="info-text"> Ingrese los datos del vehículo </h5>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+
+                                                <div class="input-group">
+
+                                                    <div class="form-inline">
+                                                        <label>Patente del Vehículo <small>(required)</small></label>
+                                                        <input class="form-control mr-sm-2" type="search" placeholder="Número de Patente" aria-label="patente">
+                                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <label>Tipo de Vehículo <small>(required)</small></label>
+                                                    <input name="Tipo Vehículo" type="text" class="form-control">
+                                                </div>
+                                                <div class="input-group">
+                                                    <label>Marca del Vehículo <small>(required)</small></label>
+                                                    <input name="Marca Vehículo" type="text" class="form-control">
+                                                </div>
+                                                <div class="input-group">
+                                                    <label>Modelo del Vehículo <small>(required)</small></label>
+                                                    <input name="Modelo Vehículo" type="text" class="form-control">
+                                                </div>
+                                                <div class="input-group">
+                                                    <label>Color del Vehículo <small>(required)</small></label>
+                                                    <input name="Color Vehículo" type="text" class="form-control">
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <!--Los tab pane dividen secciones. fin vehiculo inicio persona-->
+                                    <div class="tab-pane" id="persona">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 class="info-text"> Seleccione la persona que cometió la infracción. Si no está en la base de datos, ingresela</h5>
+                                            </div>
+
+                                            <!-- Button trigger modal -->
+
+
+                                            <a href="#" class="btn btn-primary" onclick="allPersonas()">Ver lista de Personas</a>
+                                            <!-- Modal ver personas-->
+                                            <div class="modal fade" id="verPerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Personas en la base de datos</h5>
+
+                                                        </div>
+                                                        <div class="modal-body" id="verPerModalBody">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            <button type="button" class="btn btn-primary">Seleccionar</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="btn btn-primary" onclick="CreatePersona(0)">Nueva Persona</a>
+                                            <!-- Modal crear personas-->
+                                            <div class="modal fade" id="createPerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Agregar nueva Persona</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body" id="createPerModalBody">
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            <button type="button" class="btn btn-primary">Seleccionar</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                var CreatePersona = function (id_personas) {
+                                                    var url = "/Home/CreatePersona?id_personas=" + id_personas;
+                                                    $("#createPerModalBody").load(url, function () {
+                                                        $("#createPerModal").modal("show");
+                                                    })
+                                                }
+
+
+                                                var allPersonas = function () {
+                                                    var url = "/Home/allPersonas";
+                                                    $("#verPerModalBody").load(url, function () {
+                                                        $("#verPerModal").modal("show");
+                                                    })
+                                                }
+
+
+                                            </script>
+
+
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <!--Los tab pane dividen secciones. fin persona inicio infracciones-->
+                                    <div class="tab-pane" id="infraccion">
+                                        <div class="row">
+                                            <h5 class="info-text"> Ingrese el o los códigos de la Infracción .</h5>
+                                            <div class="col-sm-4 col-sm-offset-1">
+
+                                                <div class="form-inline">
+                                                    <label>Código de Infracción <small>(required)</small></label>
+                                                    <input class="form-control mr-sm-2" type="search" placeholder="Código de Infracción" aria-label="patente">
+                                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                                                </div>
+                                                <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+                                                <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+                                                <div id="vpInfracciones">
+
+
+                                                    @Ajax.ActionLink("Mostrar Códigos", "AllInfracciones", new AjaxOptions()
+                                               {
+                                                   HttpMethod = "GET",
+                                                   UpdateTargetId = "vpInfracciones",
+                                                   InsertionMode = InsertionMode.Replace
+
+                                               })
+
+
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <!--Los tab pane dividen secciones. fin infracciones-->
+                                </div>
+                                <div class="wizard-footer">
+                                    <!--Botones-->
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-fill btn-info btn-wd' name='Siguiente' value='Siguiente' />
+                                        <input type='button' class='btn btn-finish btn-fill btn-info btn-wd' name='Registrar' value='Registrar' />
+                                    </div>
+
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-default btn-wd' name='Anterior' value='Anterior' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+
+                        </div> <!-- wizard container -->
+                    </div>
+                </div><!-- end row -->
+            </div> <!--  big container -->
+
+
+        </div>
+
+
+        <!--   Core JS Files   -->
+        <script src=@Url.Content("~/Scripts/jquery-2.2.4.min.js") type="text/javascript"></script>
+        <script src=@Url.Content("~/Scripts/bootstrap.min.js") type="text/javascript"></script>
+        <script src=@Url.Content("~/Scripts/jquery.bootstrap.wizard.js") type="text/javascript"></script>
+
+        <!--  Plugin for the Wizard -->
+        <script src=@Url.Content("~/Scripts/demo.js") type="text/javascript"></script>
+        <script src=@Url.Content("~/Scripts/paper-bootstrap-wizard.js") type="text/javascript"></script>
+
+        <!--  More information about jquery.validate here: https://jqueryvalidation.org/	 -->
+        <script src=@Url.Content("~/Scripts/jquery.validate.min.js") type="text/javascript"></script>
+    </div>
+</body>
+
+</html>

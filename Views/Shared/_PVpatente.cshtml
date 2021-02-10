@@ -1,0 +1,19 @@
+﻿
+
+@using (Ajax.BeginForm("BusqAutomotor", "Home", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "tablaAllPatentes"
+
+}))
+{
+    <p style="margin-left: 30px;">
+        Buscar Patente: @Html.TextBox("busquedaAutomotor", null, new { maxlength = 50, onkeypress = "return noCaracEsp(event)" })
+        <input type="submit" id="searchPat" class="btn btn-success btn-xs" value="Buscar" />
+    </p>
+}
+
+
+<div id="tablaAllPatentes">
+</div>

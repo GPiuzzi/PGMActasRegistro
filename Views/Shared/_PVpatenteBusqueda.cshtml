@@ -1,0 +1,101 @@
+﻿
+
+@model IEnumerable<Actas.Models.Automotore>
+
+<div class="containerBusq">
+    <table>
+        <thead class="headBusq">
+            <tr>
+
+                <th>Patente</th>
+
+                <th>Tipo de Automotor</th>
+
+                <th>Marca del vehículo</th>
+
+                <th>Modelo del vehículo</th>
+
+                <th>Color del vehículo</th>
+                <th></th>
+        
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+         
+                    <td> @x.patenteAuto</td>
+                    <td> @x.tipoAuto</td>
+                    <td> @x.marcaAuto</td>
+                    <td> @x.modeloAuto</td>
+                    <td> @x.colorAuto</td>
+
+
+                    <td>
+                        <button class="btn btn-info" id="@x.patenteAuto|@x.id_automotor|@x.tipoAuto|@x.marcaAuto|@x.modeloAuto|@x.colorAuto"> Seleccionar </button>
+                    </td>
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('button.btn-info').click(function () {
+            $('#autoModal').modal('toggle');
+            var s = $(this).attr('id').split('|');
+            var numeroActa = $('#verActa').val();
+            $("#patenteAutoID").val(s[0]);
+            $("#tipoAuto").val(s[2]);
+            $("#marcaAuto").val(s[3]);
+            $("#modeloAuto").val(s[4]);
+            $("#colorAuto").val(s[5]);
+
+            var inputForm = "<input id='id_automotor_form' name='id_automotor_form' value='" + s[1] + "'>";
+            $('#formCargaActa').append(inputForm);
+            var inputForm = "<input id='patenteAuto_form' name='patenteAuto_form' value='" + s[0] + "'>";
+            $('#formCargaActa').append(inputForm);
+            var inputForm = "<input id='tipoAuto_form' name='tipoAuto_form' value='" + s[2] + "'>";
+            $('#formCargaActa').append(inputForm);
+            var inputForm = "<input id='marcaAuto_form' name='marcaAuto_form' value='" + s[3] + "'>";
+            $('#formCargaActa').append(inputForm);
+            var inputForm = "<input id='modeloAuto_form' name='modeloAuto_form' value='" + s[4] + "'>";
+            $('#formCargaActa').append(inputForm);
+            var inputForm = "<input id='colorAuto_form' name='colorAuto_form' value='" + s[5] + "'>";
+            $('#formCargaActa').append(inputForm);
+
+            $("#patenteAutoID").prop('disabled', true);
+            $("#tipoAuto").prop('disabled', true);
+
+             $.ajax({
+                    url: "@(Url.Action("BusqPersonasAutomotor", "Validaciones"))",
+                    type: 'GET',
+                    data: {
+                        'id_automotor': s[1],
+                        'numeroActa': numeroActa
+
+                    },
+                    success: function (data) {
+                        $('#tablePersonasActa').html(data);
+                  
+                    }
+             });
+            $("#labelNumeroPatente").remove();
+            document.getElementById("divVerificarPat").classList.remove("has-success");
+            document.getElementById("divVerificarPat").classList.remove("has-error"); 
+            $("#btnLimpiarAuto").css('display', 'block');
+        })
+
+
+
+    });
+</script>

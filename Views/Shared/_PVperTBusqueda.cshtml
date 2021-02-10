@@ -1,0 +1,123 @@
+﻿
+@model IEnumerable<Actas.Models.PersonasTemp>
+
+<div class="container" style="display:grid">
+    <label style="        font-size: 18px;
+        color: #68B3C8
+">Nuevas personas asociadas al vehículo </label>
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo Documento</th>
+                <th>Número Documento</th>
+                <th>Nombre</th>
+
+                <th>Apellido</th>
+
+                <th>Calle</th>
+
+                <th>Numeración</th>
+
+                <th>Localidad</th>
+
+                <th>Código Postal</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var perT in Model)
+            {
+                <tr>
+
+                    <td> @perT.documentosT</td>
+                    <td> @perT.nroDocT</td>
+                    <td> @perT.nombreT</td>
+                    <td> @perT.apellidoT</td>
+                    <td> @perT.calleT</td>
+                    <td> @perT.nrocalleT</td>
+                    <td>@perT.localidadT</td>
+                    <td>@perT.codPostalT</td>
+
+
+
+                    <td>
+
+                        <button type="button" class="btn btn-primary cambiarRespLeg" id="@perT.id_personasT"> Agregar/cambiar Responsabilidad Legal </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary eliminarPersonaTbtn" id="@perT.id_personasT"> Eliminar</button>
+                    </td>
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+    </table>
+    <script>
+
+        $('.eliminarPersonaTbtn').click(function () {
+            console.log('se ejecutó el botón');
+            var idPersonaTemp = this.id;
+
+            console.log(idPersonaTemp);
+            console.log('el id de la persona es: ' + idPersonaTemp);
+
+            $.ajax({
+                url: "@(Url.Action("DeletePerT", "Validaciones"))",
+                data: {
+                    'idPersonaTemp': idPersonaTemp
+                },
+                type: 'POST',
+
+                success: function (data) {
+                    console.log(data);
+                    $('#tablePersonasTActa').html(data);
+
+            }
+            });
+            });
+    </script>
+    <script>
+
+        $('.cambiarRespLeg').click(function () {
+            console.log('se ejecutó el botón');
+            var idPersonaTemp = this.id;
+            console.log(idPersonaTemp);
+            console.log('el id de la persona es: ' + idPersonaTemp);
+
+            $.ajax({
+                url: "@(Url.Action("CambiarRespLeg", "Validaciones"))",
+                data: {
+                    'idPersonaTemp': idPersonaTemp
+                },
+                type: 'POST',
+
+                success: function (data) {
+                    console.log(data);
+                    $('#tablePersonasTActa').html(data);
+
+            }
+            });
+            });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.cambiarRespLeg').click(function () {
+                $('#personaModal').modal('toggle');
+                //realizar la misma logica que en pvpersonabusqueda
+
+
+            })
+
+
+
+        });
+      
+    </script>
+</div>
+

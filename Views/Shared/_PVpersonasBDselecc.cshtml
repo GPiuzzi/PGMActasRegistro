@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Actas.Models.Persona>
+
+<div >
+    <table>
+        <thead class="headBusq">
+            <tr>
+                <th>Tipo Documento</th>
+                <th>Número Documento</th>
+                <th>Nombre</th>
+
+                <th>Apellido</th>
+
+                <th>Calle</th>
+
+                <th>Numeración</th>
+
+                <th>Localidad</th>
+
+                <th>Código Postal</th>
+
+                <th></th>
+                <th></th>
+               
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var per in Model)
+            {
+            <tr>
+
+                <td> @per.documentos</td>
+                <td> @per.nroDoc</td>
+                <td> @per.nombre</td>
+                <td> @per.apellido</td>
+                <td> @per.calle</td>
+                <td> @per.nrocalle</td>
+                <td>@per.localidad</td>
+                <td>@per.codPostal</td>
+
+
+
+                <td>
+
+                    <button type="button" name="@per.eliminarDisponible" class="btn btn-primary cambiarRespLegVP" id="@per.id_personas"> Ver Responsabilidad Legal </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btneliminarInf" id="@per.id_personas" @{ if(per.eliminarDisponible) { 
+                        @:disabled="disabled" 
+                     } }> Eliminar</button>
+                </td>
+
+            </tr>
+
+
+            }
+        </tbody>
+
+
+
+    </table>
+</div>
+<script>
+
+    $('.btneliminarInf').click(function () {
+
+            console.log('se ejecutó el botón');
+        var idCodigoElim = this.id;
+        $('.btnSeleccionar').enabled = true;
+        document.getElementById("verifResp").setAttribute("value", "");
+        var nroActa = $('#verActa').val();
+        console.log(idCodigoElim);
+        console.log('el cod es: ' + idCodigoElim);
+
+            $.ajax({
+                url: "@(Url.Action("DeletePersona", "Validaciones"))",
+                data: {
+                    'idPersona': idCodigoElim,
+                    'nroActa': nroActa
+
+                },
+                type: 'POST',
+
+                success: function (data) {
+                    console.log(data);
+                    $('#tablePersonasActa').html(data);
+
+            }
+            });
+    });
+
+    $('.cambiarRespLegVP').click(function () {
+        var idPersona = this.id;
+        var eliminarDisponible = this.name;
+
+                console.log('Obteniendo responsabilidades persona:'+idPersona);
+
+                $.ajax({
+                    url: "@(Url.Action("ObtenerResponsabilidadesPersonasTemp", "Validaciones"))",
+                    type: 'GET',
+                    data: {'idPersona':idPersona},
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (result) {
+                        var respuesta = $.parseJSON(result);
+                        console.log('Obtener responsabilidades persona');
+                        console.log(respuesta);
+                        if (respuesta.responsabilidades.length > 0) {
+                            Array.prototype.forEach.call(respuesta.responsabilidades, elem => {
+
+                                switch (elem.respLegalTemp) {
+                                    case 1:
+                                        $('.esTitular').prop('checked', true);
+                                        break;
+                                    case 2:
+                                        $('.esInfractor').prop('checked', true);
+                                        break;
+                                    case 3:
+                                        $('.esRespCivil').prop('checked', true);
+                                        break;
+                                    case 4:
+                                        $('.esTutorLeg').prop('checked', true);
+                                        break;
+
+                                }
+                            });
+                        } else {
+
+                            $('.esTitular').prop('checked', true);
+                        }
+                        $('#personaModal').modal('toggle');
+                        $('#NumActaTemp').val($('#NroActaTemp_AUX').val());
+                        $('#idPersTempM').val(idPersona);
+                        $('#eliminarDisponibleAB').val(eliminarDisponible);
+                        console.log("Abriendo Modal Resp legales:");
+                        console.log("Numero Acta:" + $('#NumActaTemp').val());
+                        console.log("Id Persona:" + $('#idPersTempM').val());
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+        });
+</script>

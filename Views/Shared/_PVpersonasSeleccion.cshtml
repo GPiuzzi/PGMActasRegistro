@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Actas.Models.Persona>
+
+    <div>
+        <table>
+            <thead class="headBusq">
+                <tr>
+                    <th>Tipo Doc</th>
+                    <th>Número Doc</th>
+                    <th>Nombre</th>
+
+                    <th>Apellido</th>
+
+                    <th>Calle</th>
+
+                    <th>Numeración</th>
+
+                    <th>Localidad</th>
+
+                    <th>Código Postal</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var per in Model)
+                {
+                <tr>
+
+                    <td> @per.documentos</td>
+                    <td> @per.nroDoc</td>
+                    <td> @per.nombre</td>
+                    <td> @per.apellido</td>
+                    <td> @per.calle</td>
+                    <td> @per.nrocalle</td>
+                    <td>@per.localidad</td>
+                    <td>@per.codPostal</td>
+
+
+
+                    <td>
+                        <button class="btnSeleccionarP" id="@per.id_personas"> Seleccionar </button>
+
+                    </td>
+                   
+
+                </tr>
+
+
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+    <script type="text/javascript">
+        $('.btnSeleccionarP').click(function () {
+
+            $('#BDpersonasModal').modal('toggle');
+            console.log('se ejecutó el botón');
+            var idpersona = this.id;
+            var numeroActa = $('#verActa').val();
+            console.log(idpersona);
+            console.log('el numero de acta es: ' + numeroActa);
+            console.log('el numero de id de la persona es: ' + idpersona);
+            $.ajax({
+                url: "@(Url.Action("seleccionarPer", "Validaciones"))",
+                data: {
+                    'numeroActa': numeroActa,
+                    'idpersona': idpersona
+                },
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    $('#tablePersonasActa').html(data);
+
+            }
+            });
+            });
+        </script>

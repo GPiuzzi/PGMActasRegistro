@@ -1,0 +1,122 @@
+﻿
+
+@model IEnumerable<Actas.Models.Persona>
+
+<div class="container" style="display:grid">
+    <label style="        font-size: 18px;
+        color: #68B3C8
+">Personas asociadas al vehículo </label>
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo Documento</th>
+                <th>Número Documento</th>
+                <th>Nombre</th>
+
+                <th>Apellido</th>
+
+                <th>Calle</th>
+
+                <th>Numeración</th>
+
+                <th>Localidad</th>
+
+                <th>Código Postal</th>
+                <th></th>
+             
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var per in Model)
+            {
+                <tr>
+
+                    <td> @per.documentos</td>
+                    <td> @per.nroDoc</td>
+                    <td> @per.nombre</td>
+                    <td> @per.apellido</td>
+                    <td> @per.calle</td>
+                    <td> @per.nrocalle</td>
+                    <td>@per.localidad</td>
+                    <td>@per.codPostal</td>
+
+
+
+                    <td>
+                        <button class="btn btn-info btnCambiarResp" type="button" id="@per.id_personas"> Cambiar responsabilidad legal </button>
+                    </td>
+                   
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+    </table>
+  
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.btnCambiarResp').click(function () {
+                var idPersona = this.id;
+
+                console.log('Obteniendo responsabilidades persona:'+idPersona);
+                
+                $.ajax({
+                    url: "@(Url.Action("ObtenerResponsabilidadesPersonasTemp", "Validaciones"))",
+                    type: 'GET',
+                    data: {'idPersona':idPersona},
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (result) {
+                        var respuesta = $.parseJSON(result);
+                        console.log('Obtener responsabilidades persona');
+                        console.log(respuesta);
+                        if (respuesta.responsabilidades.length > 0) {
+                            Array.prototype.forEach.call(respuesta.responsabilidades, elem => {
+
+                                switch (elem.respLegalTemp) {
+                                    case 1:
+                                        $('.esTitular').prop('checked', true);
+                                        break;
+                                    case 2:
+                                        $('.esInfractor').prop('checked', true);
+                                        break;
+                                    case 3:
+                                        $('.esRespCivil').prop('checked', true);
+                                        break;
+                                    case 4:
+                                        $('.esTutorLeg').prop('checked', true);
+                                        break;
+
+                                }
+                            });
+                        } else {
+
+                            $('.esTitular').prop('checked', true);
+                        }
+                        $('#personaModal').modal('toggle');
+                        $('#NumActaTemp').val($('#NroActaTemp_AUX').val());
+                        $('#idPersTempM').val(idPersona);
+                        console.log("Abriendo Modal Resp legales:");
+                        console.log("Numero Acta:" + $('#NumActaTemp').val());
+                        console.log("Id Persona:" + $('#idPersTempM').val());
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+            })
+
+
+
+
+
+        });
+    </script>
+    </div>

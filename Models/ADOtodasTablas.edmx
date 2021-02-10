@@ -1,0 +1,794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActasTabla">
+          <Key>
+            <PropertyRef Name="id_acta" />
+          </Key>
+          <Property Name="id_acta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nroActa" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="estadoActa" Type="bit" Nullable="false" />
+          <Property Name="fechaAlta" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_inspector" Type="int" />
+          <Property Name="id_infraccionxActa" Type="int" />
+          <Property Name="id_automotor" Type="int" />
+          <Property Name="id_personaxacta" Type="int" />
+          <Property Name="calleInf" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fechaInf" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="horaInf" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="observacionesInf" Type="varbinary" MaxLength="100" />
+          <Property Name="id_personaxauto" Type="int" />
+        </EntityType>
+        <EntityType Name="Automotores">
+          <Key>
+            <PropertyRef Name="id_automotor" />
+          </Key>
+          <Property Name="id_automotor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipoAuto" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="modeloAuto" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="colorAuto" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="patenteAuto" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="marcaAuto" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CodigoInf">
+          <Key>
+            <PropertyRef Name="id_codInf" />
+          </Key>
+          <Property Name="id_codInf" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="normativa" Type="nchar" MaxLength="50" />
+          <Property Name="descripcion" Type="nchar" MaxLength="150" />
+          <Property Name="articulo" Type="nchar" MaxLength="10" />
+          <Property Name="inciso" Type="nchar" MaxLength="10" />
+          <Property Name="calificacion" Type="nchar" MaxLength="30" />
+          <Property Name="grupo" Type="nchar" MaxLength="100" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="InfraccionxActa">
+          <Key>
+            <PropertyRef Name="id_InfraccionxActa" />
+          </Key>
+          <Property Name="id_InfraccionxActa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_codInf" Type="int" Nullable="false" />
+          <Property Name="id_acta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inspectores">
+          <Key>
+            <PropertyRef Name="id_inspector" />
+          </Key>
+          <Property Name="id_inspector" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreInsp" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellidoInsp" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="direccionIPinsp" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="rangoMinActas" Type="int" />
+          <Property Name="rangoMaxActas" Type="int" />
+        </EntityType>
+        <EntityType Name="Personas">
+          <Key>
+            <PropertyRef Name="id_personas" />
+          </Key>
+          <Property Name="id_personas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="apellido" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="calle" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="nrocalle" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="localidad" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="documentos" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="nroDoc" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="respLeg" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="codPostal" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PersonasTemp">
+          <Key>
+            <PropertyRef Name="id_personasT" />
+          </Key>
+          <Property Name="id_personasT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="apellidoT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="calleT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="nrocalleT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="localidadT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="documentosT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="nroDocT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="respLegalT" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="codPostalT" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PersonaxActa">
+          <Key>
+            <PropertyRef Name="id_personaxacta" />
+          </Key>
+          <Property Name="id_personaxacta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_persona" Type="int" Nullable="false" />
+          <Property Name="numeroacta" Type="int" Nullable="false" />
+          <Property Name="resplegal" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonaxAuto">
+          <Key>
+            <PropertyRef Name="id_personaxauto" />
+          </Key>
+          <Property Name="id_personaxauto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_persona" Type="int" />
+          <Property Name="id_auto" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TiposDoc">
+          <Key>
+            <PropertyRef Name="id_tiposdoc" />
+          </Key>
+          <Property Name="id_tiposdoc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="documentos" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ActasTabla_Automotores">
+          <End Role="Automotores" Type="Self.Automotores" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automotores">
+              <PropertyRef Name="id_automotor" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_automotor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_InfraccionxActa">
+          <End Role="InfraccionxActa" Type="Self.InfraccionxActa" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfraccionxActa">
+              <PropertyRef Name="id_InfraccionxActa" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_infraccionxActa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_Inspectores">
+          <End Role="Inspectores" Type="Self.Inspectores" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectores">
+              <PropertyRef Name="id_inspector" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_inspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_PersonaxActa">
+          <End Role="PersonaxActa" Type="Self.PersonaxActa" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonaxActa">
+              <PropertyRef Name="id_personaxacta" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_personaxacta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_PersonaxActa1">
+          <End Role="PersonaxActa" Type="Self.PersonaxActa" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonaxActa">
+              <PropertyRef Name="id_personaxacta" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_personaxacta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_PersonaxAuto">
+          <End Role="PersonaxAuto" Type="Self.PersonaxAuto" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonaxAuto">
+              <PropertyRef Name="id_personaxauto" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_personaxauto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfraccionxActa_CodigoInf">
+          <End Role="CodigoInf" Type="Self.CodigoInf" Multiplicity="1" />
+          <End Role="InfraccionxActa" Type="Self.InfraccionxActa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodigoInf">
+              <PropertyRef Name="id_codInf" />
+            </Principal>
+            <Dependent Role="InfraccionxActa">
+              <PropertyRef Name="id_codInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonaxActa_Personas">
+          <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
+          <End Role="PersonaxActa" Type="Self.PersonaxActa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="id_personas" />
+            </Principal>
+            <Dependent Role="PersonaxActa">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonaxAuto_Automotores">
+          <End Role="Automotores" Type="Self.Automotores" Multiplicity="0..1" />
+          <End Role="PersonaxAuto" Type="Self.PersonaxAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automotores">
+              <PropertyRef Name="id_automotor" />
+            </Principal>
+            <Dependent Role="PersonaxAuto">
+              <PropertyRef Name="id_auto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonaxAuto_Personas">
+          <End Role="Personas" Type="Self.Personas" Multiplicity="0..1" />
+          <End Role="PersonaxAuto" Type="Self.PersonaxAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="id_personas" />
+            </Principal>
+            <Dependent Role="PersonaxAuto">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="ActasTabla" EntityType="Self.ActasTabla" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Automotores" EntityType="Self.Automotores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CodigoInf" EntityType="Self.CodigoInf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfraccionxActa" EntityType="Self.InfraccionxActa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspectores" EntityType="Self.Inspectores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonasTemp" EntityType="Self.PersonasTemp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonaxActa" EntityType="Self.PersonaxActa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonaxAuto" EntityType="Self.PersonaxAuto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposDoc" EntityType="Self.TiposDoc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActasTabla_Automotores" Association="Self.FK_ActasTabla_Automotores">
+            <End Role="Automotores" EntitySet="Automotores" />
+            <End Role="ActasTabla" EntitySet="ActasTabla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_InfraccionxActa" Association="Self.FK_ActasTabla_InfraccionxActa">
+            <End Role="InfraccionxActa" EntitySet="InfraccionxActa" />
+            <End Role="ActasTabla" EntitySet="ActasTabla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_Inspectores" Association="Self.FK_ActasTabla_Inspectores">
+            <End Role="Inspectores" EntitySet="Inspectores" />
+            <End Role="ActasTabla" EntitySet="ActasTabla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_PersonaxActa" Association="Self.FK_ActasTabla_PersonaxActa">
+            <End Role="PersonaxActa" EntitySet="PersonaxActa" />
+            <End Role="ActasTabla" EntitySet="ActasTabla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_PersonaxActa1" Association="Self.FK_ActasTabla_PersonaxActa1">
+            <End Role="PersonaxActa" EntitySet="PersonaxActa" />
+            <End Role="ActasTabla" EntitySet="ActasTabla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_PersonaxAuto" Association="Self.FK_ActasTabla_PersonaxAuto">
+            <End Role="PersonaxAuto" EntitySet="PersonaxAuto" />
+            <End Role="ActasTabla" EntitySet="ActasTabla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfraccionxActa_CodigoInf" Association="Self.FK_InfraccionxActa_CodigoInf">
+            <End Role="CodigoInf" EntitySet="CodigoInf" />
+            <End Role="InfraccionxActa" EntitySet="InfraccionxActa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonaxActa_Personas" Association="Self.FK_PersonaxActa_Personas">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="PersonaxActa" EntitySet="PersonaxActa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonaxAuto_Automotores" Association="Self.FK_PersonaxAuto_Automotores">
+            <End Role="Automotores" EntitySet="Automotores" />
+            <End Role="PersonaxAuto" EntitySet="PersonaxAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonaxAuto_Personas" Association="Self.FK_PersonaxAuto_Personas">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="PersonaxAuto" EntitySet="PersonaxAuto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActasTabla">
+          <Key>
+            <PropertyRef Name="id_acta" />
+          </Key>
+          <Property Name="id_acta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nroActa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="estadoActa" Type="Boolean" Nullable="false" />
+          <Property Name="fechaAlta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_inspector" Type="Int32" />
+          <Property Name="id_infraccionxActa" Type="Int32" />
+          <Property Name="id_automotor" Type="Int32" />
+          <Property Name="id_personaxacta" Type="Int32" />
+          <Property Name="calleInf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaInf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="horaInf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observacionesInf" Type="Binary" MaxLength="100" FixedLength="false" />
+          <Property Name="id_personaxauto" Type="Int32" />
+          <NavigationProperty Name="Automotore" Relationship="Self.FK_ActasTabla_Automotores" FromRole="ActasTabla" ToRole="Automotores" />
+          <NavigationProperty Name="InfraccionxActa" Relationship="Self.FK_ActasTabla_InfraccionxActa" FromRole="ActasTabla" ToRole="InfraccionxActa" />
+          <NavigationProperty Name="Inspectore" Relationship="Self.FK_ActasTabla_Inspectores" FromRole="ActasTabla" ToRole="Inspectores" />
+          <NavigationProperty Name="PersonaxActa" Relationship="Self.FK_ActasTabla_PersonaxActa" FromRole="ActasTabla" ToRole="PersonaxActa" />
+          <NavigationProperty Name="PersonaxActa1" Relationship="Self.FK_ActasTabla_PersonaxActa1" FromRole="ActasTabla" ToRole="PersonaxActa" />
+          <NavigationProperty Name="PersonaxAuto" Relationship="Self.FK_ActasTabla_PersonaxAuto" FromRole="ActasTabla" ToRole="PersonaxAuto" />
+        </EntityType>
+        <EntityType Name="Automotore">
+          <Key>
+            <PropertyRef Name="id_automotor" />
+          </Key>
+          <Property Name="id_automotor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoAuto" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="modeloAuto" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="colorAuto" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="patenteAuto" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="marcaAuto" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ActasTablas" Relationship="Self.FK_ActasTabla_Automotores" FromRole="Automotores" ToRole="ActasTabla" />
+          <NavigationProperty Name="PersonaxAutoes" Relationship="Self.FK_PersonaxAuto_Automotores" FromRole="Automotores" ToRole="PersonaxAuto" />
+        </EntityType>
+        <EntityType Name="CodigoInf">
+          <Key>
+            <PropertyRef Name="id_codInf" />
+          </Key>
+          <Property Name="id_codInf" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="normativa" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="articulo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="inciso" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="calificacion" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="grupo" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="InfraccionxActas" Relationship="Self.FK_InfraccionxActa_CodigoInf" FromRole="CodigoInf" ToRole="InfraccionxActa" />
+        </EntityType>
+        <EntityType Name="InfraccionxActa">
+          <Key>
+            <PropertyRef Name="id_InfraccionxActa" />
+          </Key>
+          <Property Name="id_InfraccionxActa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_codInf" Type="Int32" Nullable="false" />
+          <Property Name="id_acta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActasTablas" Relationship="Self.FK_ActasTabla_InfraccionxActa" FromRole="InfraccionxActa" ToRole="ActasTabla" />
+          <NavigationProperty Name="CodigoInf" Relationship="Self.FK_InfraccionxActa_CodigoInf" FromRole="InfraccionxActa" ToRole="CodigoInf" />
+        </EntityType>
+        <EntityType Name="Inspectore">
+          <Key>
+            <PropertyRef Name="id_inspector" />
+          </Key>
+          <Property Name="id_inspector" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreInsp" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="apellidoInsp" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="direccionIPinsp" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="rangoMinActas" Type="Int32" />
+          <Property Name="rangoMaxActas" Type="Int32" />
+          <NavigationProperty Name="ActasTablas" Relationship="Self.FK_ActasTabla_Inspectores" FromRole="Inspectores" ToRole="ActasTabla" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="id_personas" />
+          </Key>
+          <Property Name="id_personas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="calle" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nrocalle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="localidad" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="documentos" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nroDoc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="respLeg" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="codPostal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PersonaxActas" Relationship="Self.FK_PersonaxActa_Personas" FromRole="Personas" ToRole="PersonaxActa" />
+          <NavigationProperty Name="PersonaxAutoes" Relationship="Self.FK_PersonaxAuto_Personas" FromRole="Personas" ToRole="PersonaxAuto" />
+        </EntityType>
+        <EntityType Name="PersonasTemp">
+          <Key>
+            <PropertyRef Name="id_personasT" />
+          </Key>
+          <Property Name="id_personasT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="apellidoT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="calleT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nrocalleT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="localidadT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="documentosT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nroDocT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="respLegalT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="codPostalT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PersonaxActa">
+          <Key>
+            <PropertyRef Name="id_personaxacta" />
+          </Key>
+          <Property Name="id_personaxacta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_persona" Type="Int32" Nullable="false" />
+          <Property Name="numeroacta" Type="Int32" Nullable="false" />
+          <Property Name="resplegal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ActasTablas" Relationship="Self.FK_ActasTabla_PersonaxActa" FromRole="PersonaxActa" ToRole="ActasTabla" />
+          <NavigationProperty Name="ActasTablas1" Relationship="Self.FK_ActasTabla_PersonaxActa1" FromRole="PersonaxActa" ToRole="ActasTabla" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_PersonaxActa_Personas" FromRole="PersonaxActa" ToRole="Personas" />
+        </EntityType>
+        <EntityType Name="PersonaxAuto">
+          <Key>
+            <PropertyRef Name="id_personaxauto" />
+          </Key>
+          <Property Name="id_personaxauto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_persona" Type="Int32" />
+          <Property Name="id_auto" Type="Int32" />
+          <NavigationProperty Name="ActasTablas" Relationship="Self.FK_ActasTabla_PersonaxAuto" FromRole="PersonaxAuto" ToRole="ActasTabla" />
+          <NavigationProperty Name="Automotore" Relationship="Self.FK_PersonaxAuto_Automotores" FromRole="PersonaxAuto" ToRole="Automotores" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_PersonaxAuto_Personas" FromRole="PersonaxAuto" ToRole="Personas" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TiposDoc">
+          <Key>
+            <PropertyRef Name="id_tiposdoc" />
+          </Key>
+          <Property Name="id_tiposdoc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="documentos" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ActasTabla_Automotores">
+          <End Role="Automotores" Type="Self.Automotore" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automotores">
+              <PropertyRef Name="id_automotor" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_automotor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_InfraccionxActa">
+          <End Role="InfraccionxActa" Type="Self.InfraccionxActa" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfraccionxActa">
+              <PropertyRef Name="id_InfraccionxActa" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_infraccionxActa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_Inspectores">
+          <End Role="Inspectores" Type="Self.Inspectore" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectores">
+              <PropertyRef Name="id_inspector" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_inspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_PersonaxActa">
+          <End Role="PersonaxActa" Type="Self.PersonaxActa" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonaxActa">
+              <PropertyRef Name="id_personaxacta" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_personaxacta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_PersonaxActa1">
+          <End Role="PersonaxActa" Type="Self.PersonaxActa" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonaxActa">
+              <PropertyRef Name="id_personaxacta" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_personaxacta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActasTabla_PersonaxAuto">
+          <End Role="PersonaxAuto" Type="Self.PersonaxAuto" Multiplicity="0..1" />
+          <End Role="ActasTabla" Type="Self.ActasTabla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonaxAuto">
+              <PropertyRef Name="id_personaxauto" />
+            </Principal>
+            <Dependent Role="ActasTabla">
+              <PropertyRef Name="id_personaxauto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonaxAuto_Automotores">
+          <End Role="Automotores" Type="Self.Automotore" Multiplicity="0..1" />
+          <End Role="PersonaxAuto" Type="Self.PersonaxAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automotores">
+              <PropertyRef Name="id_automotor" />
+            </Principal>
+            <Dependent Role="PersonaxAuto">
+              <PropertyRef Name="id_auto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfraccionxActa_CodigoInf">
+          <End Role="CodigoInf" Type="Self.CodigoInf" Multiplicity="1" />
+          <End Role="InfraccionxActa" Type="Self.InfraccionxActa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CodigoInf">
+              <PropertyRef Name="id_codInf" />
+            </Principal>
+            <Dependent Role="InfraccionxActa">
+              <PropertyRef Name="id_codInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonaxActa_Personas">
+          <End Role="Personas" Type="Self.Persona" Multiplicity="1" />
+          <End Role="PersonaxActa" Type="Self.PersonaxActa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="id_personas" />
+            </Principal>
+            <Dependent Role="PersonaxActa">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonaxAuto_Personas">
+          <End Role="Personas" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="PersonaxAuto" Type="Self.PersonaxAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="id_personas" />
+            </Principal>
+            <Dependent Role="PersonaxAuto">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ActasEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActasTablas" EntityType="Self.ActasTabla" />
+          <EntitySet Name="Automotores" EntityType="Self.Automotore" />
+          <EntitySet Name="CodigoInfs" EntityType="Self.CodigoInf" />
+          <EntitySet Name="InfraccionxActas" EntityType="Self.InfraccionxActa" />
+          <EntitySet Name="Inspectores" EntityType="Self.Inspectore" />
+          <EntitySet Name="Personas" EntityType="Self.Persona" />
+          <EntitySet Name="PersonasTemps" EntityType="Self.PersonasTemp" />
+          <EntitySet Name="PersonaxActas" EntityType="Self.PersonaxActa" />
+          <EntitySet Name="PersonaxAutoes" EntityType="Self.PersonaxAuto" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TiposDocs" EntityType="Self.TiposDoc" />
+          <AssociationSet Name="FK_ActasTabla_Automotores" Association="Self.FK_ActasTabla_Automotores">
+            <End Role="Automotores" EntitySet="Automotores" />
+            <End Role="ActasTabla" EntitySet="ActasTablas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_InfraccionxActa" Association="Self.FK_ActasTabla_InfraccionxActa">
+            <End Role="InfraccionxActa" EntitySet="InfraccionxActas" />
+            <End Role="ActasTabla" EntitySet="ActasTablas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_Inspectores" Association="Self.FK_ActasTabla_Inspectores">
+            <End Role="Inspectores" EntitySet="Inspectores" />
+            <End Role="ActasTabla" EntitySet="ActasTablas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_PersonaxActa" Association="Self.FK_ActasTabla_PersonaxActa">
+            <End Role="PersonaxActa" EntitySet="PersonaxActas" />
+            <End Role="ActasTabla" EntitySet="ActasTablas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_PersonaxActa1" Association="Self.FK_ActasTabla_PersonaxActa1">
+            <End Role="PersonaxActa" EntitySet="PersonaxActas" />
+            <End Role="ActasTabla" EntitySet="ActasTablas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActasTabla_PersonaxAuto" Association="Self.FK_ActasTabla_PersonaxAuto">
+            <End Role="PersonaxAuto" EntitySet="PersonaxAutoes" />
+            <End Role="ActasTabla" EntitySet="ActasTablas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonaxAuto_Automotores" Association="Self.FK_PersonaxAuto_Automotores">
+            <End Role="Automotores" EntitySet="Automotores" />
+            <End Role="PersonaxAuto" EntitySet="PersonaxAutoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfraccionxActa_CodigoInf" Association="Self.FK_InfraccionxActa_CodigoInf">
+            <End Role="CodigoInf" EntitySet="CodigoInfs" />
+            <End Role="InfraccionxActa" EntitySet="InfraccionxActas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonaxActa_Personas" Association="Self.FK_PersonaxActa_Personas">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="PersonaxActa" EntitySet="PersonaxActas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonaxAuto_Personas" Association="Self.FK_PersonaxAuto_Personas">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="PersonaxAuto" EntitySet="PersonaxAutoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="ActasEntities7">
+          <EntitySetMapping Name="ActasTablas">
+            <EntityTypeMapping TypeName="Models.ActasTabla">
+              <MappingFragment StoreEntitySet="ActasTabla">
+                <ScalarProperty Name="id_acta" ColumnName="id_acta" />
+                <ScalarProperty Name="nroActa" ColumnName="nroActa" />
+                <ScalarProperty Name="estadoActa" ColumnName="estadoActa" />
+                <ScalarProperty Name="fechaAlta" ColumnName="fechaAlta" />
+                <ScalarProperty Name="id_inspector" ColumnName="id_inspector" />
+                <ScalarProperty Name="id_infraccionxActa" ColumnName="id_infraccionxActa" />
+                <ScalarProperty Name="id_automotor" ColumnName="id_automotor" />
+                <ScalarProperty Name="id_personaxacta" ColumnName="id_personaxacta" />
+                <ScalarProperty Name="calleInf" ColumnName="calleInf" />
+                <ScalarProperty Name="fechaInf" ColumnName="fechaInf" />
+                <ScalarProperty Name="horaInf" ColumnName="horaInf" />
+                <ScalarProperty Name="observacionesInf" ColumnName="observacionesInf" />
+                <ScalarProperty Name="id_personaxauto" ColumnName="id_personaxauto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Automotores">
+            <EntityTypeMapping TypeName="Models.Automotore">
+              <MappingFragment StoreEntitySet="Automotores">
+                <ScalarProperty Name="id_automotor" ColumnName="id_automotor" />
+                <ScalarProperty Name="tipoAuto" ColumnName="tipoAuto" />
+                <ScalarProperty Name="modeloAuto" ColumnName="modeloAuto" />
+                <ScalarProperty Name="colorAuto" ColumnName="colorAuto" />
+                <ScalarProperty Name="patenteAuto" ColumnName="patenteAuto" />
+                <ScalarProperty Name="marcaAuto" ColumnName="marcaAuto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodigoInfs">
+            <EntityTypeMapping TypeName="Models.CodigoInf">
+              <MappingFragment StoreEntitySet="CodigoInf">
+                <ScalarProperty Name="id_codInf" ColumnName="id_codInf" />
+                <ScalarProperty Name="normativa" ColumnName="normativa" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="inciso" ColumnName="inciso" />
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfraccionxActas">
+            <EntityTypeMapping TypeName="Models.InfraccionxActa">
+              <MappingFragment StoreEntitySet="InfraccionxActa">
+                <ScalarProperty Name="id_InfraccionxActa" ColumnName="id_InfraccionxActa" />
+                <ScalarProperty Name="id_codInf" ColumnName="id_codInf" />
+                <ScalarProperty Name="id_acta" ColumnName="id_acta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspectores">
+            <EntityTypeMapping TypeName="Models.Inspectore">
+              <MappingFragment StoreEntitySet="Inspectores">
+                <ScalarProperty Name="id_inspector" ColumnName="id_inspector" />
+                <ScalarProperty Name="nombreInsp" ColumnName="nombreInsp" />
+                <ScalarProperty Name="apellidoInsp" ColumnName="apellidoInsp" />
+                <ScalarProperty Name="direccionIPinsp" ColumnName="direccionIPinsp" />
+                <ScalarProperty Name="rangoMinActas" ColumnName="rangoMinActas" />
+                <ScalarProperty Name="rangoMaxActas" ColumnName="rangoMaxActas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personas">
+            <EntityTypeMapping TypeName="Models.Persona">
+              <MappingFragment StoreEntitySet="Personas">
+                <ScalarProperty Name="id_personas" ColumnName="id_personas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="nrocalle" ColumnName="nrocalle" />
+                <ScalarProperty Name="localidad" ColumnName="localidad" />
+                <ScalarProperty Name="documentos" ColumnName="documentos" />
+                <ScalarProperty Name="nroDoc" ColumnName="nroDoc" />
+                <ScalarProperty Name="respLeg" ColumnName="respLeg" />
+                <ScalarProperty Name="codPostal" ColumnName="codPostal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonasTemps">
+            <EntityTypeMapping TypeName="Models.PersonasTemp">
+              <MappingFragment StoreEntitySet="PersonasTemp">
+                <ScalarProperty Name="id_personasT" ColumnName="id_personasT" />
+                <ScalarProperty Name="nombreT" ColumnName="nombreT" />
+                <ScalarProperty Name="apellidoT" ColumnName="apellidoT" />
+                <ScalarProperty Name="calleT" ColumnName="calleT" />
+                <ScalarProperty Name="nrocalleT" ColumnName="nrocalleT" />
+                <ScalarProperty Name="localidadT" ColumnName="localidadT" />
+                <ScalarProperty Name="documentosT" ColumnName="documentosT" />
+                <ScalarProperty Name="nroDocT" ColumnName="nroDocT" />
+                <ScalarProperty Name="respLegalT" ColumnName="respLegalT" />
+                <ScalarProperty Name="codPostalT" ColumnName="codPostalT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonaxActas">
+            <EntityTypeMapping TypeName="Models.PersonaxActa">
+              <MappingFragment StoreEntitySet="PersonaxActa">
+                <ScalarProperty Name="id_personaxacta" ColumnName="id_personaxacta" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="numeroacta" ColumnName="numeroacta" />
+                <ScalarProperty Name="resplegal" ColumnName="resplegal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonaxAutoes">
+            <EntityTypeMapping TypeName="Models.PersonaxAuto">
+              <MappingFragment StoreEntitySet="PersonaxAuto">
+                <ScalarProperty Name="id_personaxauto" ColumnName="id_personaxauto" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="id_auto" ColumnName="id_auto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Models.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposDocs">
+            <EntityTypeMapping TypeName="Models.TiposDoc">
+              <MappingFragment StoreEntitySet="TiposDoc">
+                <ScalarProperty Name="id_tiposdoc" ColumnName="id_tiposdoc" />
+                <ScalarProperty Name="documentos" ColumnName="documentos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

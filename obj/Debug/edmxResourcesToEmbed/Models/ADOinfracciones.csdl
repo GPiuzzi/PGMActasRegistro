@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Infraccione">
+    <Key>
+      <PropertyRef Name="id_infraccion" />
+    </Key>
+    <Property Name="id_infraccion" Type="Int32" Nullable="false" />
+    <Property Name="tipoInf" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ActasEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Infracciones" EntityType="Self.Infraccione" />
+  </EntityContainer>
+</Schema>

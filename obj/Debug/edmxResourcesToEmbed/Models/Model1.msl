@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="ActasEntities6">
+    <EntitySetMapping Name="ActasTablas">
+      <EntityTypeMapping TypeName="Models.ActasTabla">
+        <MappingFragment StoreEntitySet="ActasTabla">
+          <ScalarProperty Name="id_acta" ColumnName="id_acta" />
+          <ScalarProperty Name="nroActa" ColumnName="nroActa" />
+          <ScalarProperty Name="estadoActa" ColumnName="estadoActa" />
+          <ScalarProperty Name="fechaAlta" ColumnName="fechaAlta" />
+          <ScalarProperty Name="id_inspector" ColumnName="id_inspector" />
+          <ScalarProperty Name="id_infraccionxActa" ColumnName="id_infraccionxActa" />
+          <ScalarProperty Name="id_automotor" ColumnName="id_automotor" />
+          <ScalarProperty Name="id_personaxacta" ColumnName="id_personaxacta" />
+          <ScalarProperty Name="calleInf" ColumnName="calleInf" />
+          <ScalarProperty Name="fechaInf" ColumnName="fechaInf" />
+          <ScalarProperty Name="horaInf" ColumnName="horaInf" />
+          <ScalarProperty Name="observacionesInf" ColumnName="observacionesInf" />
+          <ScalarProperty Name="id_personaxauto" ColumnName="id_personaxauto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Automotores">
+      <EntityTypeMapping TypeName="Models.Automotore">
+        <MappingFragment StoreEntitySet="Automotores">
+          <ScalarProperty Name="id_automotor" ColumnName="id_automotor" />
+          <ScalarProperty Name="tipoAuto" ColumnName="tipoAuto" />
+          <ScalarProperty Name="modeloAuto" ColumnName="modeloAuto" />
+          <ScalarProperty Name="colorAuto" ColumnName="colorAuto" />
+          <ScalarProperty Name="patenteAuto" ColumnName="patenteAuto" />
+          <ScalarProperty Name="marcaAuto" ColumnName="marcaAuto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodigoInfs">
+      <EntityTypeMapping TypeName="Models.CodigoInf">
+        <MappingFragment StoreEntitySet="CodigoInf">
+          <ScalarProperty Name="id_codInf" ColumnName="id_codInf" />
+          <ScalarProperty Name="normativa" ColumnName="normativa" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="articulo" ColumnName="articulo" />
+          <ScalarProperty Name="inciso" ColumnName="inciso" />
+          <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+          <ScalarProperty Name="grupo" ColumnName="grupo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfraccionxActas">
+      <EntityTypeMapping TypeName="Models.InfraccionxActa">
+        <MappingFragment StoreEntitySet="InfraccionxActa">
+          <ScalarProperty Name="id_InfraccionxActa" ColumnName="id_InfraccionxActa" />
+          <ScalarProperty Name="id_codInf" ColumnName="id_codInf" />
+          <ScalarProperty Name="id_acta" ColumnName="id_acta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inspectores">
+      <EntityTypeMapping TypeName="Models.Inspectore">
+        <MappingFragment StoreEntitySet="Inspectores">
+          <ScalarProperty Name="id_inspector" ColumnName="id_inspector" />
+          <ScalarProperty Name="nombreInsp" ColumnName="nombreInsp" />
+          <ScalarProperty Name="apellidoInsp" ColumnName="apellidoInsp" />
+          <ScalarProperty Name="direccionIPinsp" ColumnName="direccionIPinsp" />
+          <ScalarProperty Name="rangoMinActas" ColumnName="rangoMinActas" />
+          <ScalarProperty Name="rangoMaxActas" ColumnName="rangoMaxActas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="Models.Persona">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="id_personas" ColumnName="id_personas" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="nrocalle" ColumnName="nrocalle" />
+          <ScalarProperty Name="localidad" ColumnName="localidad" />
+          <ScalarProperty Name="documentos" ColumnName="documentos" />
+          <ScalarProperty Name="nroDoc" ColumnName="nroDoc" />
+          <ScalarProperty Name="respLeg" ColumnName="respLeg" />
+          <ScalarProperty Name="codPostal" ColumnName="codPostal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonasTemps">
+      <EntityTypeMapping TypeName="Models.PersonasTemp">
+        <MappingFragment StoreEntitySet="PersonasTemp">
+          <ScalarProperty Name="id_personasT" ColumnName="id_personasT" />
+          <ScalarProperty Name="nombreT" ColumnName="nombreT" />
+          <ScalarProperty Name="apellidoT" ColumnName="apellidoT" />
+          <ScalarProperty Name="calleT" ColumnName="calleT" />
+          <ScalarProperty Name="nrocalleT" ColumnName="nrocalleT" />
+          <ScalarProperty Name="localidadT" ColumnName="localidadT" />
+          <ScalarProperty Name="documentosT" ColumnName="documentosT" />
+          <ScalarProperty Name="nroDocT" ColumnName="nroDocT" />
+          <ScalarProperty Name="respLegalT" ColumnName="respLegalT" />
+          <ScalarProperty Name="codPostalT" ColumnName="codPostalT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonaxActas">
+      <EntityTypeMapping TypeName="Models.PersonaxActa">
+        <MappingFragment StoreEntitySet="PersonaxActa">
+          <ScalarProperty Name="id_personaxacta" ColumnName="id_personaxacta" />
+          <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+          <ScalarProperty Name="numeroacta" ColumnName="numeroacta" />
+          <ScalarProperty Name="resplegal" ColumnName="resplegal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonaxAutoes">
+      <EntityTypeMapping TypeName="Models.PersonaxAuto">
+        <MappingFragment StoreEntitySet="PersonaxAuto">
+          <ScalarProperty Name="id_personaxauto" ColumnName="id_personaxauto" />
+          <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+          <ScalarProperty Name="id_auto" ColumnName="id_auto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Models.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDocs">
+      <EntityTypeMapping TypeName="Models.TiposDoc">
+        <MappingFragment StoreEntitySet="TiposDoc">
+          <ScalarProperty Name="id_tiposdoc" ColumnName="id_tiposdoc" />
+          <ScalarProperty Name="documentos" ColumnName="documentos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

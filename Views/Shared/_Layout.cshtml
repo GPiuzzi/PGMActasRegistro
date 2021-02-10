@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+    
+    <link href='~/documentation/css/themify-icons-demo.css' rel='stylesheet' />
+    <link href='~/documentation/css/themify-icons.css' rel='stylesheet' />
+
+
+    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+
+
+    <link href='~/Content/Estilos/bootstrap.min.css' rel='stylesheet' />
+
+    <link href='~/Content/Estilos/demo.css' rel='stylesheet' />
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+
+<body>
+    @RenderBody()
+
+
+
+
+    <script>
+        //funcion p mostrar personas
+        $(function () {
+
+            $('#btnAllPerTempModal').click(function () {
+                $('#verPerTempModal').modal('toggle');
+                $.ajax({
+                    url: "@(Url.Action("allPersonasTemp","Home"))",
+                    type: 'GET',
+                    cache: false,
+                    sucess: function (result) {
+                        $('#divAllPer').html(result);
+                    }
+
+
+
+
+                });
+                return false;
+
+            });
+        });
+
+
+
+        $(function () {
+
+            $("#createPerModal",).appendTo("body");
+            $("#verPerTempModal",).appendTo("body");
+            $("#createPerTempModal",).appendTo("body");
+            $("#codInfraccModal",).appendTo("body");
+            $("#inspectorModal",).appendTo("body");
+            $("#verPerTModal",).appendTo("body");
+            $("#verPerModal",).appendTo("body");
+            $("#crearPerModal",).appendTo("body");
+            $("#personaModal",).appendTo("body");
+            $("#BDpersonasModal",).appendTo("body");
+
+        });
+    </script>
+
+
+
+
+    <!--funcion  ver infracciones-->
+    <script>
+        $(function () {
+            $("#btnBuscarInfracc").click(function () {
+                $("#codInfraccModal").modal('toggle');
+                $.ajax({
+
+                    url: "@(Url.Action("allCodInfracciones", "Home"))",
+
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#divInfraccion').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <!--funcion  ver Inspectores-->
+    <script>
+        $(function () {
+            $("#btnBuscarInspector").click(function () {
+                $("#inspectorModal").modal('toggle');
+                $.ajax({
+
+                    url: "@(Url.Action("allInspectores", "Home"))",
+
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#divInspector').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+    <!--funcion  ver Automotores-->
+    <script>
+        $(function () {
+            $("#btnBuscarAuto").click(function () {
+                $("#autoModal").modal('toggle');
+                $.ajax({
+
+                    url: "@(Url.Action("allAutomotores", "Home"))",
+
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#divAutomotor').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+
+
+    <!--funcion modificar personas  -->
+    <script>
+        $(function () {
+            $("#btnModificarPers").click(function () {
+                $("#modificarPerModal").modal('toggle');
+                $.ajax({
+
+                    url: "@(Url.Action("CrearPersona", "Home"))",
+
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#divModificarPer').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script>
+        //script verificar acta
+        $("#verActa").blur(function () {
+         var nroActa = $('#verActa').val();
+
+
+            $('#NroActaTemp_AUX').val(this.value);
+            console.log('Numero de acta:' + this.value);
+
+            $.ajax({
+                url: "@(Url.Action("VerifyActa", "Validaciones"))",
+                type: 'GET',
+                data: { 'nroActa': nroActa },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = $.parseJSON(data);
+                    $("#labelNumeroActa").remove();
+                    document.getElementById("divVerificar").classList.remove("has-success");
+                    document.getElementById("divVerificar").classList.remove("has-error"); //remove para que no se superpongan los mensajes
+                    if (result.success) {
+                        $("#verActa").after('<small id="labelNumeroActa" style="color:red">' + result.Message + '</small>');
+                        document.getElementById("divVerificar").classList.add("has-error");
+                        document.getElementById("verActa").classList.add("error");
+                        $('#verActa').val("");
+                    }
+                    else {
+                        $("#verActa").after('<small id="labelNumeroActa" style="color:green">' + result.Message + '</small>');
+                        document.getElementById("divVerificar").classList.add("has-success");
+
+
+
+                    }
+                }
+            });
+        });
+        $("#verActa").blur(function () {
+            var nroActa = $('#verActa').val();
+            var id_inspector = $('#inspectorId_form').val();
+            console.log(id_inspector);
+
+            $.ajax({ 
+                url: "@(Url.Action("verificarRangoInsp", "Validaciones"))",
+                type: 'GET',
+                data: {
+                    'nroActa': nroActa,
+                    'id_inspector': id_inspector
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = $.parseJSON(data);
+                    $("#labelNumeroActaRangoInspector").remove();
+                    if (result.success) {
+                        $("#verActa").after('<small class="control" id="labelNumeroActaRangoInspector" style="color:green">' + result.Message + '</small>');
+                        document.getElementById("verActa").classList.remove("error");
+                        document.getElementById("labelNumeroActaRangoInspector").classList.remove("error");
+                    }
+                    else {
+                        $("#verActa").after('<small class="control" id="labelNumeroActaRangoInspector" style="color:red">' + result.Message + '</small>');
+                        document.getElementById("verActa").classList.add("error");
+                        $('#verActa').val("");
+                    }
+                }
+            });
+
+
+        });
+
+    </script>
+
+
+    <script>
+        //script verificar patente
+        $("#patenteAutoID").blur(function () {
+            var patenteAuto = $('#patenteAutoID').val();
+            var patenteValidacion = $('#patenteAutoID').val().trim();
+
+
+            if (patenteValidacion != "") {
+                $.ajax({
+                    url: "@(Url.Action("VerifyPatente", "Validaciones"))",
+                    type: 'GET',
+                    data: { 'patenteAuto': patenteAuto },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        var result = $.parseJSON(data);
+                        $("#labelNumeroPatente").remove();
+                        document.getElementById("divVerificarPat").classList.remove("has-success");
+                        document.getElementById("divVerificarPat").classList.remove("has-error"); //remove para que no se superpongan los mensajes
+                        if (result.success) {
+                            $("#patenteAutoID").after('<small id="labelNumeroPatente" style="color:red">' + result.Message + '</small>');
+                            document.getElementById("divVerificarPat").classList.add("has-error");
+                            $('#patenteAutoID').val("");
+                        }
+                        else {
+                            $("#patenteAutoID").after('<small id="labelNumeroPatente" style="color:green">' + result.Message + '</small>');
+                            document.getElementById("divVerificarPat").classList.add("has-success");
+                        }
+                    }
+
+                });
+            }
+        });
+
+    </script>
+    <script>
+  
+        $("#botonverificarPersonas").click(function () {
+        var nroActa = $('#verActa').val();
+           var confirmacion = $('#verifResp').val();
+            console.log('confirmacion' + confirmacion.val);
+            $.ajax({
+                url: "@(Url.Action("verificarTitulareInfractor", "Validaciones"))",
+                type: 'GET',
+                data: {'nroActa': nroActa},
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = $.parseJSON(data);
+                    console.log(result);
+                    console.log(data);
+                    if (result.success) {
+                        document.getElementById("verifResp").setAttribute("value", "Correcto");
+                        alert('Datos correctos. Puede continuar');
+                    } else {
+                        document.getElementById("verifResp").setAttribute("value", "");
+                        alert('Debe cargar al menos un titular y sólo un infractor. Revise');
+                    }
+                }
+            });
+        });
+
+
+
+    </script>
+    <script>
+        //función inspector form invisible
+        $("#inspectorID").blur(function () {
+            $("#inspector_form").remove();
+
+            var inspector = $("#inspectorID").val();
+
+
+            var inspectorID = this.id;
+            console.log(inspector);
+            var inputForm = "<input id='inspector_form' name='inspector_form' value='" + inspector + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función numero acta form invisible
+        $("#verActa").blur(function () {
+            $("#numeroActa_form").remove();
+            var numeroActa = $("#verActa").val();
+            var inputForm = "<input id='numeroActa_form' name='numeroActa_form' value='" + numeroActa + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función calleInf form invisiblebrn
+        $("#calleInf").blur(function () {
+            $("#calleInf_form").remove();
+            var calleInf = $("#calleInf").val().toUpperCase();
+            var inputForm = "<input id='calleInf_form' name='calleInf_form' value='" + calleInf + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función horaInf form invisible
+        $("#fechaInf").blur(function () {
+            $("#fechaInf_form").remove();
+            var fechaInf = $("#fechaInf").val();
+            var inputForm = "<input id='fechaInf_form' name='fechaInf_form' value='" + fechaInf + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función obs form invisible
+        $("#observacionesInf").blur(function () {
+            $("#observacionesInf_form").remove();
+            var observacionesInf = $("#observacionesInf").val();
+            var inputForm = "<input id='observacionesInf_form' name='observacionesInf_form' value='" + observacionesInf + "'>";
+           $('#formCargaActa').append(inputForm);
+        });
+        //función patente form invisible
+        $("#patenteAutoID").blur(function () {
+            $("#patenteAuto_form").remove();
+            var patenteAutoID = $("#patenteAutoID").val().toUpperCase();
+            var inputForm = "<input id='patenteAuto_form' name='patenteAuto_form' value='" + patenteAutoID + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función tipo auto form invisible
+        $("#tipoAuto").blur(function () {
+            $("#tipoAuto_form").remove();
+            var tipoAuto = $("#tipoAuto").val().toUpperCase();
+            var inputForm = "<input id='tipoAuto_form' name='tipoAuto_form' value='" + tipoAuto + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función modelo form invisible
+        $("#modeloAuto").blur(function () {
+            $("#modeloAuto_form").remove();
+            var modeloAuto = $("#modeloAuto").val().toUpperCase();
+            var inputForm = "<input id='modeloAuto_form' name='modeloAuto_form' value='" + modeloAuto + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función marca form invisible
+        $("#marcaAuto").blur(function () {
+            $("#marcaAuto_form").remove();
+            var marcaAuto = $("#marcaAuto").val().toUpperCase();
+            var inputForm = "<input id='marcaAuto_form' name='marcaAuto_form' value='" + marcaAuto + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función color form invisible
+        $("#colorAuto").blur(function () {
+            $("#colorAuto_form").remove();
+            var colorAuto = $("#colorAuto").val().toUpperCase();
+            var inputForm = "<input id='colorAuto_form' name='colorAuto_form' value='" + colorAuto + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función persona form invisible
+        $("#perID").blur(function () {
+            $("#perID_form").remove();
+            var personaID = $("#perID").val().toUpperCase();
+            var inputForm = "<input id='perID_form' name='perID_form' value='" + personaID + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función marca form invisible
+        $("#codInfraccID").blur(function () {
+            $("#codInfraccID_form").remove();
+            var codigoInfraccion = $("#codInfraccID").val();
+            var inputForm = "<input id='codInfraccID_form' name='codInfraccID_form' value='" + codigoInfraccion + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+        //función marca form invisible
+        $("#horaInf").blur(function () {
+            $("#horaInf_form").remove();
+            var horaInf = $("#horaInf").val();
+            var inputForm = "<input id='horaInf_form' name='horaInf_form' value='" + horaInf + "'>";
+            $('#formCargaActa').append(inputForm);
+        });
+    </script>
+
+    <script>
+
+        //esta función limpia las tablas cuando se aprieta el botón "nuevo"
+        $("#reset").click(function () {
+            var result = confirm("Se borrarán todos los datos ingresados hasta el momento.¿Seguro que desea continuar?");
+            if (result) {
+                $.ajax({
+                    url: "@(Url.Action("eliminartablas", "Validaciones"))",
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function () {
+                        window.location.reload(true);
+
+                    }
+                });
+            };
+        });
+
+
+
+    </script>
+
+
+    <!--Acciones Persona-->
+    <script>
+        //ESTA FUNCION ABRE EL MODAL DE CARGAR PERSONAS DE LA BD
+        $(function () {
+            $("#btnVerPerBD").click(function () {
+                $("#BDpersonasModal").modal('toggle');
+                $.ajax({
+
+                    url: "@(Url.Action("allPersonasBD", "Home"))",
+
+                    type: 'GET',
+
+                    cache: false,
+                    success: function (result) {
+                        $('#divPersonasBD').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+    <script>
+        //ESTA FUNCION ABRE EL MODAL DE CARGAR UN PERSONA NUEVA
+        $(function () {
+            $("#btnCrearPer").click(function () {
+                $("#crearPerModal").modal('toggle');
+                $.ajax({
+
+                    url: "@(Url.Action("CrearPersona", "Validaciones"))",
+
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#divCrearPer').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+
+    <script>
+
+        //esta función debe confirmar que al menos hay una infracción cargada
+        $("#reset").click(function () {
+            var result = confirm("Se borrarán todos los datos ingresados hasta el momento.¿Seguro que desea continuar?");
+            if (result) {
+                $.ajax({
+                    url: "@(Url.Action("eliminartablas", "Validaciones"))",
+                    type: 'GET',
+
+                    contentType: 'application/json; charset=utf-8',
+                    success: function () {
+                        window.location.reload(true);
+
+                    }
+                });
+            };
+        });
+
+
+
+    </script>
+
+
+    <script>
+
+        //esta función debe confirmar que al menos hay una infracción cargada
+        $("#btnRegistro").mouseenter(function () {
+        var nroActa = $('#verActa').val();
+            var confirmacion = $('#verifInfracc').val();
+            console.log('confirmacion' + confirmacion.val);
+            $.ajax({
+                url: "@(Url.Action("verificarUnCodInf", "Validaciones"))",
+                type: 'GET',
+                data: {'nroActa': nroActa},
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = $.parseJSON(data);
+                    console.log(result);
+                    console.log(data);
+                    if (result.success) {
+                     document.getElementById("verifInfracc").setAttribute("value", "Correcto");
+
+                    } else {
+                        document.getElementById("verifInfracc").setAttribute("value", "");
+                        alert('Debe ingresar al menos un código de infracción. Revise');
+                    }
+                }
+            });
+        });
+
+
+
+
+
+    </script>
+
+  
+
+
+
+</body>
+
+</html>

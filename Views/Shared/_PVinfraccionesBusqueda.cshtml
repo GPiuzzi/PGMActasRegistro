@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Actas.Models.CodInf>
+
+<div class="containerBusq">
+    <table>
+        <thead class="headBusq">
+            <tr>
+                <th>Código</th>
+
+                <th>Normativa</th>
+
+                <th>Artículo</th>
+
+                <th>Inciso</th>
+
+                <th>Concepto</th>
+                <th>Concepto Largo</th>
+
+       
+
+                <th>Calificación</th>
+
+                <th>Estado</th>
+                <th></th>
+              
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cod in Model)
+            {
+                <tr>
+
+                    <td> @cod.codigo</td>
+                    <td> @cod.id_normativa</td>
+                    <td> @cod.articulo</td>
+                    <td> @cod.inciso</td>
+                    <td> @cod.concepto</td>
+                    <td> @cod.concepto_largo</td>
+                    
+                    <td>@cod.calificacion</td>
+                    <td>@cod.estado</td>
+
+                    <td>
+                        <button class="btnSeleccionar" id="@cod.id_codInf" > Seleccionar </button>
+
+                    </td>
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+    </table>
+</div>
+<script type="text/javascript">
+    $('.btnSeleccionar').click(function () {
+        $('#codInfraccModal').modal('toggle');
+            console.log('se ejecutó el botón');
+            var idcodigo = this.id;
+            var numeroActa = $('#verActa').val();
+            console.log(idcodigo);
+            console.log('el numero de acta es: ' + numeroActa);
+            document.getElementById(idcodigo).disabled = true;
+            $.ajax({
+                url: "@(Url.Action("seleccionarInf", "Validaciones"))",
+                data: {
+                    'numeroActa': numeroActa,
+                    'idCodigo':idcodigo
+                },
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    $('#tableSelecInfracciones').html(data);
+            
+            }
+            });
+            });
+
+    $(document).ready(function () {
+           $('button.btn-info').click(function () {
+            var s = $(this).attr('id');
+            $("#codInfraccID").attr("value", s);
+            $("#codInfraccID").val(s);
+
+
+
+        })
+
+
+
+    });
+</script>
+

@@ -1,0 +1,17 @@
+﻿@using (Ajax.BeginForm("BusqPersonas", "Validaciones", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "tablaAllpersonas"
+
+}))
+{
+    <p style="margin-left: 20px;">
+        Buscar personas registradas en la base de datos: @Html.TextBox("busquedaPer", null, new { maxlength = 50, onkeypress = "return noCaracEspConGuion(event)" })
+        <input type="submit" id="searchPersonas" class="btn btn-success btn-xs" value="Buscar" />
+    </p>
+}
+
+
+<div id="tablaAllpersonas">
+</div>

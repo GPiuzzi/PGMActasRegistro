@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<Actas.Models.Inspectore>
+
+<div class="containerBusq" style="display:grid">
+    <table>
+        <thead class="headBusq">
+            <tr>
+
+                <th>Nombre</th>
+
+                <th>Apellido</th>
+
+                <th>Rango de actas (min)</th>
+
+                <th>Rango de actas (max)</th>
+                <th></th>
+          
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var insp in Model)
+            {
+                <tr>
+
+                    <td> @insp.nombreInsp</td>
+                    <td> @insp.apellidoInsp</td>
+                    <td> @insp.rangoMinActas</td>
+                    <td> @insp.rangoMaxActas</td>
+
+
+                    <td>
+                        <button class="btn btn-info" id="@insp.id_inspector |@insp.nombreInsp @insp.apellidoInsp | @insp.rangoMinActas | @insp.rangoMaxActas"> Seleccionar </button>
+                    </td>
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('button.btn-info').click(function () {
+            $('#inspectorModal').modal('toggle');
+            $("#inspectorID-error").remove();
+                
+            var s = $(this).attr('id').split('|');
+            $("#inspectorID").attr("value", s[1]);
+            $("#inspectorID").val(s[1] + " (rango de actas: " + s[2] + " - " + s[3] + ")");
+            console.log(s);
+            $("#inspectorId_form").remove();
+            var inspector = s[0];
+            var inputForm = "<input id='inspectorId_form' name='inspectorId_form' value='" + inspector + "'>";
+            $('#formCargaActa').append(inputForm);
+            $("#verActa").prop("disabled", false);
+            console.log(s);
+            $('#verActa').val("");
+            $("#labelNumeroActa").remove();
+            document.getElementById("divVerificar").classList.remove("has-success");
+            document.getElementById("divVerificar").classList.remove("has-error"); //remove para que no se superpongan los mensajes
+            $("#labelNumeroActaRangoInspector").remove();
+        })
+
+      
+    });
+</script>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="ActasEntities2">
+    <EntitySetMapping Name="Infracciones">
+      <EntityTypeMapping TypeName="Models.Infraccione">
+        <MappingFragment StoreEntitySet="Infracciones">
+          <ScalarProperty Name="id_infraccion" ColumnName="id_infraccion" />
+          <ScalarProperty Name="tipoInf" ColumnName="tipoInf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,199 @@
+﻿@model Actas.Models.PersonasTemp
+<script>
+    $("#documentosT").blur(function () {
+        var string = $("#documentosT").val();
+        string = string.trim();
+        if (string.toLowerCase() == "cuil") {
+            console.log(string)
+            $("#nroDocT").mask("99-99999999-9", { placeholder: "XX-XXXXXXXX-X" });
+
+        }
+        else {
+            $("#nroDocT").unmask();
+        }
+
+    }
+
+    );
+</script>
+
+@using (Ajax.BeginForm("CrearPersona", "Validaciones", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "tablaAllPersonasTemp",
+    OnSuccess = "validarPer" 
+}))
+
+{
+    @Html.AntiForgeryToken()
+
+<form id="createForm">
+
+
+
+    <div class="form-group">
+        <label class="control-label col-md-12" for="documentost">Tipo de Documento</label>
+        <div class="col-md-12">
+            <input class="form-control text" name="documentosT" id="documentosT" maxlength="30" onkeypress="return letras(event);" required>
+
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-12" for="nroDocT">Número de Documento</label>
+        <div class="col-md-12">
+
+            <input class="form-control" type="text" name="nroDocT" id="nroDocT" minlength="7" required onkeypress="return isNumberKey(event)">
+            <div id="divVerificar"></div>
+
+        </div>
+
+
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-12" for="nombreT">Nombre</label>
+
+        <div class="col-md-12">
+            <input class="form-control" name="nombreT" id="nombreT" maxlength="30" onkeypress="return letras(event);" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-md-12" for="apellidoT">Apellido</label>
+        <div class="col-md-12">
+
+            <input class="form-control " name="apellidoT" id="apellidoT" maxlength="30" onkeypress="return letras(event);" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-12" for="calleT">Calle</label>
+        <div class="col-md-12">
+            <input class="form-control " name="calleT" id="calleT" maxlength="30" onkeypress="return noCaracEsp(event)" required>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-12" for="nrocalleT">Número de Calle</label>
+        <div class="col-md-12">
+            <input class="form-control " name="nrocalleT" id="nrocalleT" maxlength="30" onkeypress="return noCaracEsp(event)" required>
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-12" for="localidadT">Localidad</label>
+        <div class="col-md-12">
+
+            <input class="form-control " name="localidadT" id="localidadT" maxlength="30" onkeypress="return noCaracEsp(event)" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-12" for="codPostalT">Código Postal</label>
+        <div class="col-md-12">
+
+            <input class="form-control " type="number" name="codPostalT" id="codPostalT" min="0" maxlength="7" onkeypress="return isNumberKey(event)" required>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+    <input id="NroActaT_Form" name="NroActaT" style="display:none"><br>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <button type="submit" value="Agregar" style="margin-top:20px;" class="btn btn-primary" id="btnAgregarPerTemp"> Agregar Persona</button>
+        </div>
+    </div>
+</form>
+
+
+}
+
+<div id="tablaAllPersonasTemp"></div>
+
+<script type="text/javascript">
+
+
+
+
+
+
+    function validarPer() {
+        $("#crearPerModal").modal('toggle');
+        $('#nroDocT').val = ("");
+            var numeroActa = $('#verActa').val();
+
+                $.ajax({
+                    url: "@(Url.Action("tablaPerNueva", "Validaciones"))",
+                    type: 'POST',
+                    data: { 'numeroActa': numeroActa },
+                    success: function (data) {
+                        $('#tablePersonasActa').html(data);
+
+                    }
+                });
+            };
+    ;
+
+
+ 
+
+
+</script>
+<script>
+
+        $("#nroDocT").blur(function () {
+            var nroDocT = $('#nroDocT').val();
+            $("#labelPersona").remove();
+            document.getElementById("divVerificar").classList.remove("has-success");
+            document.getElementById("divVerificar").classList.remove("has-error"); //remove para que no se superpongan los mensajes
+            console.log('nroDocT' + this.value);
+            if (nroDocT != "") {
+
+
+                $.ajax({
+                    url: "@(Url.Action("VerifyPersona", "Validaciones"))",
+                    type: 'GET',
+                    data: { 'nroDocT': nroDocT },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        var result = $.parseJSON(data);
+                        $("#labelPersona").remove();
+                        document.getElementById("divVerificar").classList.remove("has-success");
+                        document.getElementById("divVerificar").classList.remove("has-error"); //remove para que no se superpongan los mensajes
+                        if (result.success) {
+                            $("#nroDocT").after('<small id="labelPersona" style="color:red">' + result.Message + '</small>');
+                            document.getElementById("divVerificar").classList.add("has-error");
+                            document.getElementById("nroDocT").classList.add("error");
+                            $("#nroDocT").val("");
+
+                        }
+                        else {
+                            $("#nroDocT").after('<small id="labelPersona" style="color:green">' + result.Message + '</small>');
+                            document.getElementById("divVerificar").classList.add("has-success");
+                            document.getElementById("nroDocT").classList.remove("error");
+
+
+
+                        }
+                    }
+                });
+            }
+        });
+
+    $("#documentosT").change(function () {
+        var numeroActa = $('#verActa').val();
+        $("#NroActaT_Form").val(numeroActa);
+        console.log($("#NroActaT_Form"));
+    });
+</script>
+

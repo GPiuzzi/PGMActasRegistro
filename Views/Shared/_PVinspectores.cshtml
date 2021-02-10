@@ -1,0 +1,18 @@
+﻿
+@using (Ajax.BeginForm("BusqInspectores", "Home", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "tablaAllInspectores"
+
+}))
+{
+<p style="margin-left: 12px;">
+    Buscar Inspector: @Html.TextBox("busquedaInspec", null, new { maxlength = 50, onkeypress = "return noCaracEsp(event)" })
+    <input type="submit" id="searchInspec" class="btn btn-success btn-xs" value="Buscar" />
+</p>
+}
+
+
+<div id="tablaAllInspectores">
+</div>

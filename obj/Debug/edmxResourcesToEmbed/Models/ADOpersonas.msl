@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="ActasEntities1">
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="Models.Persona">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="id_personas" ColumnName="id_personas" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="nrocalle" ColumnName="nrocalle" />
+          <ScalarProperty Name="localidad" ColumnName="localidad" />
+          <ScalarProperty Name="documentos" ColumnName="documentos" />
+          <ScalarProperty Name="nroDoc" ColumnName="nroDoc" />
+          <ScalarProperty Name="respLeg" ColumnName="respLeg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Actas.Models.CodInf>
+
+<div class="containerBusq" >
+    <table>
+        <thead class="headBusq">
+            <tr>
+                <th>Código</th>
+
+                <th>Normativa</th>
+
+                <th>Artículo</th>
+
+                <th>Inciso</th>
+
+                <th>Concepto</th>
+                <th>Concepto Largo</th>
+
+                <th>Grupo</th>
+
+                <th>Calificación</th>
+
+                <th>Estado</th>
+                <th></th>
+          
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cod in Model)
+            {
+                <tr>
+
+                    <td> @cod.codigo</td>
+                    <td> @cod.id_normativa</td>
+                    <td> @cod.articulo</td>
+                    <td> @cod.inciso</td>
+                    <td> @cod.concepto</td>
+                    <td> @cod.concepto_largo</td>
+                    <td> @cod.id_grupo</td>
+                    <td>@cod.calificacion</td>
+                    <td>@cod.estado</td>
+
+
+                    <td>
+                        <button type="button" class="btneliminarInf" id="@cod.id_codInf"> Eliminar</button>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+    </table>
+</div>
+<script>
+
+    $('.btneliminarInf').click(function () {
+            console.log('se ejecutó el botón');
+        var idCodigoElim = this.id;
+        document.getElementById("verifInfracc").setAttribute("value", "");
+        $('.btnSeleccionar').enabled = true;
+        var nroActa = $('#verActa').val();
+        console.log(idCodigoElim);
+        console.log('el cod es: ' + idCodigoElim);
+     
+            $.ajax({
+                url: "@(Url.Action("DeleteInf", "Validaciones"))",
+                data: {
+                    'idCodigoElim': idCodigoElim,
+                    'nroActa': nroActa
+
+                },
+                type: 'POST',
+
+                success: function (data) {
+                    console.log(data);
+                    $('#tableSelecInfracciones').html(data);
+                   
+            }
+            });
+            });
+</script>
