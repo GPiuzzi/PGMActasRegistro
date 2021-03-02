@@ -43,7 +43,7 @@ $("#fechaInf").change(function () {
         mm = '0' + mm
     }
 
-    today = yyyy + '-' + mm + '-' + dd;
+    today = dd+"/"+mm+"/"+yyyy;
     document.getElementById("fechaInf").setAttribute("max", today);
 
 
@@ -68,7 +68,7 @@ $("#horaInf").blur(function () {
     if (mm < 10) {
         mm = '0' + mm
 
-        today = yyyy + '-' + mm + '-' + dd;
+        today = dd + "/" + mm + "/" + yyyy;
 
         var currentdate = new Date();
         var hh = currentdate.getHours();

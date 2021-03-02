@@ -46,7 +46,7 @@ namespace Actas.AccesoDatos
 
                 RegistrarActa(acta);
                 
-                string SqlPersonasTemp = "INSERT INTO Personas(nombre, apellido, calle, nrocalle, localidad, documentos, nroDoc, codPostal) SELECT nombreT, apellidoT, calleT, nrocalleT, localidadT, documentosT, nroDocT, codPostalT FROM PersonasTemp";
+                string SqlPersonasTemp = "INSERT INTO Personas(id_personas, nombre, apellido, calle, nrocalle, localidad, documentos, nroDoc, codPostal) SELECT id_personasT, nombreT, apellidoT, calleT, nrocalleT, localidadT, documentosT, nroDocT, codPostalT FROM PersonasTemp";
                 string SqlPersonasActaTemp = "INSERT INTO PersonaxActa (id_persona, numeroacta, resplegal) SELECT id_personasTemp, numeroActaTemp, respLegalTemp FROM PersonasxActaTemp";
                 string SqlInfraccionesActaTemp = "INSERT INTO InfraccionxActa (id_codInf, nroActa) SELECT id_codInfTemp, nroActaTemp FROM InfraccionxActaTemp";
                 string SqlPersonasDelTemp = "DELETE PersonasTemp";
@@ -59,7 +59,8 @@ namespace Actas.AccesoDatos
                 ejecutarConsulta(SqlPersonasDelTemp);
                 ejecutarConsulta(SqlPersonasActaDelTemp);
                 ejecutarConsulta(SqlInfraccionesActaDelTemp);
-            
+
+        
             }
             catch (Exception e)
             {
@@ -67,6 +68,9 @@ namespace Actas.AccesoDatos
             }
             return resultado;
         }
+
+
+
 
         public static bool ejecutarConsulta(string sql)
         {
@@ -207,7 +211,7 @@ namespace Actas.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consulta = "INSERT INTO CodInfTemp VALUES(@codigoT, @conceptoT, @calificacionT, @articuloT, @incisoT, @estadoT, @id_grupoT, @concepto_largoT, @id_normativaT) SELECT FROM CodInf VALUES(@codigo, @concepto, @calificacion, @articulo, @inciso, @estado, @id_grupo, @concepto_largo, @id_normativa)";
+                string consulta = "INSERT INTO CodInfTemp VALUES(@codigoT, @conceptoT, @calificacionT, @articuloT, @incisoT, @estadoT, @id_grupoT, @concepto_largoT, @id_normativaT, @montoT) SELECT FROM CodInf VALUES(@codigo, @concepto, @calificacion, @articulo, @inciso, @estado, @id_grupo, @concepto_largo, @id_normativa, @monto)";
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.AddWithValue("@codigoT", y.codigo);
@@ -219,6 +223,8 @@ namespace Actas.AccesoDatos
                 cmd.Parameters.AddWithValue("@id_grupoT", y.id_grupo);
                 cmd.Parameters.AddWithValue("@concepto_largoT", y.concepto_largo);
                 cmd.Parameters.AddWithValue("@id_normativaT", y.id_normativa);
+                //esto es nuevo
+                cmd.Parameters.AddWithValue("@montoT", y.monto);
 
 
                 cmd.CommandType = System.Data.CommandType.Text;

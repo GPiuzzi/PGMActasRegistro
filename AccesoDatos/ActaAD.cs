@@ -12,6 +12,163 @@ namespace Actas.AccesoDatos
 
     public class ActaAD
     {
+       public static String[] datosActa (int nroActa)
+        {
+
+            String[] datosA= new String [13];
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["cadenaBD"].ToString();
+            SqlConnection con = new SqlConnection(cadenaConexion);
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+
+
+                string seleccInfr = "SELECT i.nombreInsp, i.apellidoInsp, a.tipoAuto, a.modeloAuto, a.colorAuto, a.patenteAuto, a.marcaAuto, c.monto, ac.fechaAlta, ac.calleInf, ac.fechaInf, ac.nroActa, ac.horaInf FROM ActasTabla ac inner join Automotores a ON a.id_automotor = ac.id_automotor inner join Inspectores i on i.id_inspector = ac.id_inspector inner join InfraccionxActa ixa on ac.nroActa = ixa.nroActa inner join Codinf c on ixa.id_codInf = c.id_codInf WHERE ac.nroActa = @nroActa";
+                comando.Parameters.AddWithValue("@nroActa", nroActa);
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = seleccInfr;
+                con.Open();
+                comando.Connection = con;
+                SqlDataReader lector = comando.ExecuteReader();
+                if (lector != null)
+                {
+                    while (lector.Read())
+                    {
+                        datosA[0] = lector["nombreInsp"].ToString();
+                        datosA[1] = lector["apellidoInsp"].ToString();
+                        datosA[2] = lector["tipoAuto"].ToString();
+                        datosA[3] = lector["modeloAuto"].ToString();
+                        datosA[4] = lector["colorAuto"].ToString();
+                        datosA[5] = lector["patenteAuto"].ToString();
+                        datosA[6] = lector["marcaAuto"].ToString();
+                        datosA[7] = lector["fechaAlta"].ToString();
+                        datosA[8] = lector["calleInf"].ToString();
+                        datosA[9] = lector["fechaInf"].ToString();
+                        datosA[10] = lector["horaInf"].ToString();
+                        datosA[11] = lector["monto"].ToString();
+                        datosA[12] = lector["nroActa"].ToString();
+                    }
+                }
+            }
+
+            catch (Exception e)
+            { throw; }
+            finally
+            {
+                con.Close();
+
+            }
+
+            return datosA;
+
+        }
+
+
+
+        public static String[] datosInfractor(int nroActa)
+        {
+
+            String[] datosP = new String[5];
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["cadenaBD"].ToString();
+            SqlConnection con = new SqlConnection(cadenaConexion);
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+
+
+                string seleccP = "SELECT p.nombre, p.apellido, p.calle, p.nrocalle, p.localidad FROM Personas p inner join PersonaxActa pxa ON p.id_personas = pxa.id_persona WHERE pxa.numeroacta = @nroActa AND pxa.resplegal = 2";
+                comando.Parameters.AddWithValue("@nroActa", nroActa);
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = seleccP;
+                con.Open();
+                comando.Connection = con;
+                SqlDataReader lector = comando.ExecuteReader();
+                if (lector != null)
+                {
+                    while (lector.Read())
+                    {
+                        datosP[0] = lector["nombre"].ToString();
+                        datosP[1] = lector["apellido"].ToString();
+                        datosP[2] = lector["calle"].ToString();
+                        datosP[3] = lector["nrocalle"].ToString();
+                        datosP[4] = lector["localidad"].ToString();
+                      
+
+                    }
+                }
+            }
+
+            catch (Exception e)
+            { throw; }
+            finally
+            {
+                con.Close();
+
+            }
+
+            return datosP;
+
+        }
+
+
+
+        public static List<CodInf> datosCodInf(int nroActa)
+        {
+
+            List<CodInf> lista = new List<CodInf>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["cadenaBD"].ToString();
+            SqlConnection con = new SqlConnection(cadenaConexion);
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+
+
+                string seleccInf = "SELECT ci.codigo, ci.concepto, ci.monto FROM CodInf ci JOIN InfraccionxActa ia  ON ci.id_codInf = ia.id_codInf WHERE ia.nroActa = @nroActa";
+     comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@nroActa", nroActa);
+
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = seleccInf;
+                con.Open();
+                comando.Connection = con;
+                SqlDataReader lector = comando.ExecuteReader();
+                if (lector != null)
+                {
+                    while (lector.Read())
+                    {
+                        CodInf x = new CodInf();
+
+                        x.codigo = lector["codigo"].ToString();
+                        x.concepto = lector["concepto"].ToString();
+                        x.monto = double.Parse(lector["monto"].ToString());
+                   
+
+
+
+                        lista.Add(x);
+                    }
+                }
+            }
+
+            catch (Exception e)
+            { throw; }
+            finally
+            {
+                con.Close();
+
+            }
+
+            return lista;
+
+        }
+
+
+
+
+
+
+
+
         /// <summary>
         /// ESTE METODO DEVUELVE EL LISTADO DE PERSONAS TEMPORALES ASIGNADOS AL ACTA EN CURSO
         /// </summary>
@@ -473,6 +630,8 @@ namespace Actas.AccesoDatos
                         infra.articulo = lector["articulo"].ToString();
                         infra.inciso = lector["inciso"].ToString();
                         infra.estado = lector["estado"].ToString();
+                        //esto es nuevo
+                        infra.monto = double.Parse(lector["monto"].ToString());
                         listaInfr.Add(infra);
                     }
                 }
@@ -1054,6 +1213,9 @@ namespace Actas.AccesoDatos
                         infra.articuloT = lector["articuloT"].ToString();
                         infra.incisoT = lector["incisoT"].ToString();
                         infra.estadoT = lector["estadoT"].ToString();
+                     
+                        //esto es nuevo
+                        infra.montoT = (double)lector["montoT"];
                         listaInfrT.Add(infra);
                     }
                 }
@@ -1108,6 +1270,8 @@ namespace Actas.AccesoDatos
                         x.id_grupo = (int)lector["id_grupo"];
                         x.concepto_largo = lector["concepto_largo"].ToString();
                         x.id_normativa = lector["id_normativa"].ToString();
+                        //esto es nuevo
+                        x.monto = (double)lector["monto"];
 
 
 
@@ -1170,6 +1334,8 @@ namespace Actas.AccesoDatos
                         x.id_grupo = (int)lector["id_grupo"];
                         x.concepto_largo = lector["concepto_largo"].ToString();
                         x.id_normativa = lector["id_normativa"].ToString();
+                        //esto es nuevo
+                        x.monto = double.Parse(lector["monto"].ToString());
 
 
 

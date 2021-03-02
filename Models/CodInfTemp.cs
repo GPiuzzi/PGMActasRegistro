@@ -17,5 +17,6 @@ namespace Actas.Models
         public string id_grupoT { get; set; }
         public string concepto_largoT { get; set; }
         public string id_normativaT { get; set; }
+        public double montoT { get; set; }
     }
 }

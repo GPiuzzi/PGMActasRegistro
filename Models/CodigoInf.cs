@@ -32,7 +32,8 @@ namespace Actas.Models
         public string calificacion { get; set; }
         public string grupo { get; set; }
         public string estado { get; set; }
-    
+        public double monto { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InfraccionxActa> InfraccionxActas { get; set; }
     }

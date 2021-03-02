@@ -74,8 +74,20 @@
         });
     </script>
 
+    <!--funcion  ver pdf-->
+    <script>
+        $(function () {
+            $("#PDF").click(function () {
+                window.open("https://localhost:44313/Registro/ReportePDF");
+               
+               });
+           
+            });
+  
 
+    </script>
 
+ 
 
     <!--funcion  ver infracciones-->
     <script>
@@ -201,7 +213,7 @@
             var id_inspector = $('#inspectorId_form').val();
             console.log(id_inspector);
 
-            $.ajax({ 
+            $.ajax({
                 url: "@(Url.Action("verificarRangoInsp", "Validaciones"))",
                 type: 'GET',
                 data: {
@@ -266,7 +278,7 @@
 
     </script>
     <script>
-  
+
         $("#botonverificarPersonas").click(function () {
         var nroActa = $('#verActa').val();
            var confirmacion = $('#verifResp').val();
@@ -333,7 +345,7 @@
             $("#observacionesInf_form").remove();
             var observacionesInf = $("#observacionesInf").val();
             var inputForm = "<input id='observacionesInf_form' name='observacionesInf_form' value='" + observacionesInf + "'>";
-           $('#formCargaActa').append(inputForm);
+            $('#formCargaActa').append(inputForm);
         });
         //función patente form invisible
         $("#patenteAutoID").blur(function () {
@@ -518,7 +530,7 @@
 
     </script>
 
-  
+
 
 
 

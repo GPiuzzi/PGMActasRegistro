@@ -200,3 +200,6 @@ C:\Users\GINA\source\repos\ActasPGM\bin\System.Memory.xml
 C:\Users\GINA\source\repos\ActasPGM\bin\System.Numerics.Vectors.xml
 C:\Users\GINA\source\repos\ActasPGM\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\GINA\source\repos\ActasPGM\bin\System.Text.Encodings.Web.xml
+C:\Users\GINA\source\repos\ActasPGM\bin\BouncyCastle.Crypto.dll
+C:\Users\GINA\source\repos\ActasPGM\bin\itextsharp.dll
+C:\Users\GINA\source\repos\ActasPGM\bin\itextsharp.xml
